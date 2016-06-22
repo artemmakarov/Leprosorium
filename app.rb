@@ -1,12 +1,12 @@
 require 'rubygems'
 require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra/reloader' if development?
 
 get '/' do
   erb "Cap for /"
 end
 
 get '/new' do
-  erb "Cap for /new"
+  erb :new
 end
 

@@ -3,10 +3,14 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 
 get '/' do
-  erb "Cap for /"
+	erb "Cap for /"
 end
 
 get '/new' do
-  erb :new
+	erb :new
 end
 
+post '/new' do
+	content = params[:content]
+ 	erb "#{content}"
+end

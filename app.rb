@@ -23,11 +23,12 @@ configure do
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
  		created_date DATE,
  		content TEXT
- 	)'
+ 	);'
 end
 
 get '/' do
-	erb "Cap for /"
+	@results = @db.execute 'select * from Posts order by id desc'
+	erb :index
 end
 
 get '/new' do
@@ -37,5 +38,12 @@ end
 post '/new' do
 	# получаем переменную из POST-запроса
 	content = params[:content]
+	# проверка на пустой ввод почему-то не работает!
+	if content.length == 0
+		@error = 'Type text!'
+		return erb :new
+	end
+	@db.execute 'insert into Posts (content, created_date) values (?, datetime())', [content]
+
  	erb "#{content}"
 end

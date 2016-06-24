@@ -39,7 +39,7 @@ end
 post '/new' do
 	# получаем переменную из POST-запроса
 	content = params[:content]
-	# проверка на пустой ввод почему-то не работает!
+	
 	if content.length == 0
 		@error = 'Type text!'
 		return erb :new

@@ -27,6 +27,7 @@ configure do
 end
 
 get '/' do
+	# выбираем список постов из БД
 	@results = @db.execute 'select * from Posts order by id desc'
 	erb :index
 end
@@ -43,7 +44,8 @@ post '/new' do
 		@error = 'Type text!'
 		return erb :new
 	end
+	# сохраняем данные в БД
 	@db.execute 'insert into Posts (content, created_date) values (?, datetime())', [content]
-
- 	erb "#{content}"
+	# перенаправляем на главную страницу
+ 	redirect to '/'
 end

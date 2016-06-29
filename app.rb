@@ -23,7 +23,7 @@ configure do
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
  		created_date DATE,
  		content TEXT
- 	);'
+ 	)'
 
  	@db.execute 'CREATE TABLE IF NOT EXISTS Comments 
 	(
@@ -32,7 +32,7 @@ configure do
  		content TEXT,
  		post_id INTEGER
 
- 	);'
+ 	)'
 end
 
 get '/' do
@@ -54,7 +54,7 @@ post '/new' do
 		return erb :new
 	end
 	# сохраняем данные в БД
-	@db.execute 'insert into Posts (content, created_date,) values (?, datetime())', [content]
+	@db.execute 'insert into Posts (content, created_date) values (?, datetime())', [content]
 	# перенаправляем на главную страницу
  	redirect to '/'
 end
@@ -66,7 +66,7 @@ get '/details/:post_id' do
 	post_id = params[:post_id]
    
     # получаем список постов
-	results = @db.execute 'select * from Posts where id = ?',[post_id]
+	results = @db.execute 'select * from Posts where id = ?', [post_id]
 	# выбираем один пост в переменную @row
 	@row = results[0]
 
@@ -99,7 +99,7 @@ post  '/details/:post_id' do
 		?
 		)', [content, post_id]
 
-	redirect to ('/details' + post_id)
+	redirect to('/details' + post_id)
 
 
 end

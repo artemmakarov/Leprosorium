@@ -24,6 +24,15 @@ configure do
  		created_date DATE,
  		content TEXT
  	);'
+
+ 	@db.execute 'CREATE TABLE IF NOT EXISTS Comments 
+	(
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+ 		created_date DATE,
+ 		content TEXT
+ 		post_id INTEGER
+
+ 	);'
 end
 
 get '/' do
@@ -67,7 +76,7 @@ end
 post  '/details/:post_id' do
 	# получаем переменную из url
 	post_id = params[:post_id]
-	
+
    # получаем переменную из POST-запроса
 	content = params[:content]
 

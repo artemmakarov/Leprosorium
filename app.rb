@@ -63,3 +63,13 @@ get '/details/:post_id' do
 	# возвращаем представление details.erb
 	erb :details
 end
+
+post  '/details/:post_id' do
+	# получаем переменную из url
+	post_id = params[:post_id]
+	
+   # получаем переменную из POST-запроса
+	content = params[:content]
+
+
+end
